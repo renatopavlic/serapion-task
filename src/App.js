@@ -28,7 +28,8 @@ function App() {
       setMyDatabaseData(snapshot.docs.map(doc => ({
         id: doc.id,
          title: doc.data().title,
-          imageUrl: doc.data().imageUrl})))
+          imageUrl: doc.data().imageUrl,
+        source: doc.data().source})))
 
         console.log("this is firebase data: ", myDatabaseData)
     })
@@ -50,7 +51,7 @@ function App() {
     if (e.key === "Enter") {
       console.log("this is state: ",state);
       imdbService.search(state.s, (results)=>{
-        setState({...state, results});
+        setState({...state, results}); 
       });
     }
   }
@@ -84,7 +85,12 @@ function App() {
 
   const searchFirebase = (e) => {
     if(e.key === "Enter") {
-      db.collection("movies").where("title", "==", "batman").get().then(snapshot => console.log("this is firebase snapshot: ", snapshot.docs))
+      setState({...state, results: myDatabaseData.map(movie=>{
+        if(movie.title.toLowerCase().indexOf(state.s)!=-1){
+          return movie;
+        } else return false;
+      }).filter(movie=>{return movie})});
+      /*db.collection("movies").where("title", "==", "batman").get().then(snapshot => console.log("this is firebase snapshot: ", snapshot.docs))*/
     }
   }
 
@@ -111,8 +117,8 @@ function App() {
 
   const handleFirebase = e => {
     setState({...state, s: e.target.value});
-    console.log("firebase search input: ", state.s)
   }
+  console.log("firebase search input: ", state.s)
 
 
   return (
@@ -127,6 +133,7 @@ function App() {
         <Search handleInput={handleInputForOmdb} search={searchOmdb}/>
         <Search handleInput={handleInputForTvmaze} search={searchTvmaze}/>
         <Search handleInput={handleFirebase} search={searchFirebase} />
+        <p>aaa</p>
         {/* Results */}
         <Results results={state.results} />
         {myDatabaseData.map(movie =>

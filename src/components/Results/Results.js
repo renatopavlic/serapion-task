@@ -7,7 +7,7 @@ function Results( { results }) {
     return (
         <section className="results">
             {results.map(result => (
-                <Result key={result.imdbID} result={result} />
+                <Result key={Math.random()} result={result} />
             ))
             }
         </section>
