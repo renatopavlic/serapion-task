@@ -1,0 +1,18 @@
+.result {
+  min-width: 250px;
+  display: flex;
+  flex-direction: column;
+  padding: 15px;
+  cursor: pointer;
+  background-color: white;
+  border: 1px solid lightgray;
+  margin: 5px;
+  justify-content: center;
+  align-items: center;
+}
+
+.result__image {
+  object-fit: cover;
+  height: 100%;
+  max-width: 250px;
+}
