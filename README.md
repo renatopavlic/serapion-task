@@ -17,8 +17,8 @@ You will also see any lint errors in the console.
 
 ### dependency
 
-This app uses only one dependency and it's axios.
-I have tried not to use too many dependencies for this project, keep it simple.
+This app uses a minimal number of dependencies and it's axios (for fetching) and firebase (database and deploy).
+I have tried not to use too many dependencies for this project, just to keep it simple.
 
 ### Responsive design
 
