@@ -19,3 +19,7 @@ You will also see any lint errors in the console.
 
 This app uses only one dependency and it's axios.
 I have tried not to use too many dependencies for this project, keep it simple.
+
+### Responsive design
+
+This app is fully responsive.
