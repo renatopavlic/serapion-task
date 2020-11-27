@@ -4,15 +4,42 @@
   flex-direction: column;
   padding: 15px;
   cursor: pointer;
-  background-color: white;
-  border: 1px solid lightgray;
+  border: 1px solid black;
   margin: 5px;
   justify-content: center;
   align-items: center;
+  perspective: 1000px;
+  background-color: transparent;
 }
 
 .result__image {
   object-fit: cover;
   height: 100%;
   max-width: 250px;
+  min-height: 400px;
+}
+
+.result__title {
+  margin: 10px 0;
+  padding: 10px 5px;
+  max-width: 250px;
+  width: 100%;
+  color: white;
+  font-size: 20px;
+  background-color: rgb(17, 17, 102);
+}
+
+.result__details {
+  display: none;
+  max-width: 250px;
+  font-size: 24px;
+  background-color: black;
+  width: 100%;
+  margin-top: 5px;
+  color: white;
+}
+
+.result:hover .result__details {
+  display: block;
+  transition: 0.5s;
 }

@@ -4,7 +4,7 @@ import imdbService from "./services/imdb";
 import tmdbService from "./services/tmdb";
 import omdbService from "./services/omdb";
 import tvmazeService from "./services/tvmaze";
-import './App.css';
+import './index.css';
 import Search from "./components/Search/Search";
 import Results from "./components/Results/Results";
 import db from "./firebase";
@@ -35,17 +35,24 @@ function App() {
     })
   }, []);
 
-    /*const mainSearch = (q)=> {
-      localSearchService.then(results=>{    //localSearchService je firebase pronalazak koji trebam napraviti
-        if(!results || results.length===0){
-          imdbService.search(q).then(imdSearchResults=>{
-            if(!imdbSearchResults || imdbSearchResults.length===0){
-              tmdbService...itd;
-            }
-          })
-        }
-      })
-    }*/
+  const mainSearch = (e)=> {
+    if (e.key === "Enter") {
+      if(state.s.length === 0) {
+        alert("Nothing to search for!");
+        window.location.reload();
+      }
+      const local = giveMeLocal(state.s);
+      console.log(local);
+      if(local.length==0){
+        console.log("no local, search 3rd party sources");
+        imdbService.search(state.s, (results)=>{
+          setState({...state, results}); 
+        });
+      } else {
+        setState({...state, results: local}); 
+      }
+    }
+  }
 
   const search = (e) => {
     if (e.key === "Enter") {
@@ -94,6 +101,14 @@ function App() {
     }
   }
 
+  const giveMeLocal = (searchStr) => {
+    return myDatabaseData.map(movie=>{
+      if(movie.title.toLowerCase().indexOf(searchStr)!=-1){
+        return movie;
+      } else return false;
+    }).filter(movie=>{return movie});
+  }
+
  
 
 
@@ -124,22 +139,27 @@ function App() {
   return (
     <div className="app">
       <header>
-        <h2>Serapion Movie Search</h2>
+        <a href="/" className="header__link">
+        <img 
+        src="https://www.serapion.net/dist/images/serapion-logo-large.png"
+        alt="serapion-logo"
+        />
+        </a>
       </header>
       <main>
         {/* Search */}
-        <Search handleInput={handleInput} search={search}/>
+        <Search handleInput={handleInput} search={mainSearch}/>
+      {/*  <Search handleInput={handleInput} search={search}/>
         <Search handleInput={handleInputForTmdb} search={searchTmdb}/>
         <Search handleInput={handleInputForOmdb} search={searchOmdb}/>
         <Search handleInput={handleInputForTvmaze} search={searchTvmaze}/>
-        <Search handleInput={handleFirebase} search={searchFirebase} />
-        <p>aaa</p>
-        {/* Results */}
+        <Search handleInput={handleFirebase} search={searchFirebase} /> */}
+        {/* Results */ }
         <Results results={state.results} />
-        {myDatabaseData.map(movie =>
+      {/*   {myDatabaseData.map(movie =>
         (
           <MyResults title={movie.title} imageUrl={movie.imageUrl} />
-        ))}
+        ))} */ }
 
       </main>
     </div>

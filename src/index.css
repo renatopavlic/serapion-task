@@ -3,7 +3,8 @@
 }
 
 body {
-  background-color: blueviolet;
+  background-image: linear-gradient(white, rgb(18, 18, 121));
+  background-repeat: no-repeat;
   margin: 0;
   text-align: center;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
@@ -20,12 +21,22 @@ code {
 
 header {
   background-color: white;
-  padding: 20px 0;
+  padding: 20px;
   text-align: center;
+}
+
+header > img {
+  height: 100px;
+  max-width: 300px;
+  object-fit: contain;
 }
 
 main {
   width: 100%;
   max-width: 1560px;
   margin: 0 auto;
+}
+
+.header__link > img {
+  max-width: 300px;
 }

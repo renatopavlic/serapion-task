@@ -8,7 +8,7 @@ function MyResults({title, imageUrl}) {
   return (
     <div className="myresults">
       <img src={imageUrl} className="myresults__image"/>
-      <h2>{title}</h2>
+      <h3>{title}</h3>
     </div>
   )
 }
